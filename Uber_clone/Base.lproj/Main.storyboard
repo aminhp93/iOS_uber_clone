@@ -118,6 +118,9 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="Ggg-d3-qb5" kind="show" identifier="showRiderLocationViewController" id="scA-Dp-3t9"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -136,6 +139,42 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="axV-Oz-BM8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1871" y="250"/>
+        </scene>
+        <!--Rider Location View Controller-->
+        <scene sceneID="epl-Rl-prH">
+            <objects>
+                <viewController id="Ggg-d3-qb5" customClass="RiderLocationViewController" customModule="Uber_clone" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Tcj-Wy-Zob"/>
+                        <viewControllerLayoutGuide type="bottom" id="CYX-uk-6pd"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="SAb-gX-tGL">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="BK8-kR-b0t">
+                                <rect key="frame" x="0.0" y="139" width="375" height="384"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Xp-4D-cYa">
+                                <rect key="frame" x="123" y="569" width="132" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Accept Request"/>
+                                <connections>
+                                    <action selector="acceptRequestButton:" destination="Ggg-d3-qb5" eventType="touchUpInside" id="aTS-qi-AmO"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="acceptButton" destination="3Xp-4D-cYa" id="RYn-4x-4iB"/>
+                        <outlet property="mapView" destination="BK8-kR-b0t" id="HaN-oB-2S5"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="djj-2G-H25" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2636" y="249.62518740629687"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="K8k-jx-NqX">
