@@ -35,7 +35,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var driverLabel: UILabel!
     
     
-    
     @IBAction func signUpOrLogIn(_ sender: Any) {
         if usernameTextField.text == "" || passwordTextField.text == ""{
             displayAlert(title: "Error in Form", message: "Username and password are required")
@@ -56,7 +55,7 @@ class ViewController: UIViewController {
                         print("Sign Up Successfull")
                         if let isDriver = user["isDriver"] as? Bool{
                             if isDriver {
-                                
+                                self.performSegue(withIdentifier: "showDriverViewController", sender: self)
                             } else {
                                 self.performSegue(withIdentifier: "showRiderViewController", sender: self)
                             }
@@ -74,7 +73,7 @@ class ViewController: UIViewController {
                         print("Login Successfull")
                         if let isDriver = PFUser.current()?["isDriver"] as? Bool{
                             if isDriver {
-                                
+                                self.performSegue(withIdentifier: "showDriverViewController", sender: self)
                             } else {
                                 self.performSegue(withIdentifier: "showRiderViewController", sender: self)
                             }
@@ -121,7 +120,7 @@ class ViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         if let isDriver = PFUser.current()?["isDriver"] as? Bool{
             if isDriver {
-                
+                self.performSegue(withIdentifier: "showDriverViewController", sender: self)
             } else {
                 self.performSegue(withIdentifier: "showRiderViewController", sender: self)
             }

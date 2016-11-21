@@ -95,11 +95,63 @@
                         <outlet property="switchButton" destination="vWK-y9-qfh" id="nHq-7r-bkG"/>
                         <outlet property="usernameTextField" destination="iiP-0c-P6s" id="3Vm-Cx-z7z"/>
                         <segue destination="3Fb-bA-c4a" kind="show" identifier="showRiderViewController" id="4vR-wO-CHR"/>
+                        <segue destination="pGL-Ue-Mq2" kind="show" identifier="showDriverViewController" id="ZOx-8r-uIk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="136.80000000000001" y="129.98500749625188"/>
+        </scene>
+        <!--Request List-->
+        <scene sceneID="ez1-uo-pwm">
+            <objects>
+                <tableViewController id="oTd-my-WoP" customClass="DriverViewController" customModule="Uber_clone" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="lHi-L2-YKk">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="IST-nv-Luc">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="IST-nv-Luc" id="FOr-3n-TW3">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="oTd-my-WoP" id="ar1-b4-zRk"/>
+                            <outlet property="delegate" destination="oTd-my-WoP" id="ZDD-NJ-zPU"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Request List" id="xRA-fJ-GcD">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="kd7-nz-HHU">
+                            <connections>
+                                <segue destination="BYZ-38-t0r" kind="show" identifier="driverLogoutSegue" id="Ymu-5j-a51"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="axV-Oz-BM8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1871" y="250"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="K8k-jx-NqX">
+            <objects>
+                <navigationController id="pGL-Ue-Mq2" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="JUO-Tf-4in">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="oTd-my-WoP" kind="relationship" relationship="rootViewController" id="EYL-Bj-8Mf"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gH8-6d-bi0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="985" y="250"/>
         </scene>
         <!--Rider View Controller-->
         <scene sceneID="jAT-OB-UHS">
@@ -148,7 +200,10 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wzS-a9-oOI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="904.79999999999995" y="129.98500749625188"/>
+            <point key="canvasLocation" x="959" y="-536"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="Ymu-5j-a51"/>
+    </inferredMetricsTieBreakers>
 </document>

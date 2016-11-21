@@ -29,13 +29,17 @@ class RiderViewController: UIViewController, MKMapViewDelegate, CLLocationManage
             
             riderRequestActive = false
             
-            let query = PFQuery(className: "RiderRequest")
+            let query = PFQuery(className: "riderRequest")
             
             query.whereKey("username", equalTo: (PFUser.current()?.username)!)
+            print(query)
+            
+            print((PFUser.current()?.username)!)
             
             query.findObjectsInBackground(block: { (objects, error) in
-                if let riderRequests = objects {
-                    for i in riderRequests{
+                
+                if let objects = objects {
+                    for i in objects{
                         print("Deleted Uber")
                         i.deleteInBackground()
                     }
@@ -120,6 +124,8 @@ class RiderViewController: UIViewController, MKMapViewDelegate, CLLocationManage
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "logoutSegue"{
+            
+            locationManager.stopUpdatingLocation()
             PFUser.logOut()
         }
     }
@@ -130,6 +136,23 @@ class RiderViewController: UIViewController, MKMapViewDelegate, CLLocationManage
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestAlwaysAuthorization()
         locationManager.startUpdatingLocation()
+        
+        callAnUber.isHidden = true
+        
+        let query = PFQuery(className: "RiderRequest")
+        
+        query.whereKey("username", equalTo: (PFUser.current()?.username)!)
+        
+        query.findObjectsInBackground(block: { (objects, error) in
+            
+            if let riderRequests = objects {
+                if riderRequests.count > 0 {
+                    self.riderRequestActive = true
+                    self.callAnUber.setTitle("Cancel Uber", for: [])
+                }
+            }
+            self.callAnUber.isHidden = false
+        })
 
         // Do any additional setup after loading the view.
     }
