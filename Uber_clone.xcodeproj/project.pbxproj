@@ -234,6 +234,7 @@
 				TargetAttributes = {
 					274796281DE2A7EF0094F610 = {
 						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = LVA22MYZ28;
 						ProvisioningStyle = Automatic;
 					};
 					2747963C1DE2A7EF0094F610 = {
@@ -456,6 +457,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = LVA22MYZ28;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -472,6 +474,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = LVA22MYZ28;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",

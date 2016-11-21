@@ -16,6 +16,8 @@ class RiderViewController: UIViewController, MKMapViewDelegate, CLLocationManage
     
     var riderRequestActive = true
     
+    var driverOnTheWay = false
+    
     var userLocation:CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 0, longitude: 0)
     
     @IBOutlet weak var mapView: MKMapView!
@@ -88,19 +90,22 @@ class RiderViewController: UIViewController, MKMapViewDelegate, CLLocationManage
             
             userLocation = CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)
             
-            let region = MKCoordinateRegion(center: userLocation, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+            if driverOnTheWay == false {
             
-            self.mapView.setRegion(region, animated: true)
+                let region = MKCoordinateRegion(center: userLocation, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+                
+                self.mapView.setRegion(region, animated: true)
+                
+                self.mapView.removeAnnotations(self.mapView.annotations)
+                
+                let annotation = MKPointAnnotation()
+                
+                annotation.coordinate = userLocation
+                
+                annotation.title = "Your location"
             
-            self.mapView.removeAnnotations(self.mapView.annotations)
-            
-            let annotation = MKPointAnnotation()
-            
-            annotation.coordinate = userLocation
-            
-            annotation.title = "Your location"
-            
-            self.mapView.addAnnotation(annotation)
+                self.mapView.addAnnotation(annotation)
+            }
         
             
             let query = PFQuery(className: "RiderRequest")
@@ -116,7 +121,67 @@ class RiderViewController: UIViewController, MKMapViewDelegate, CLLocationManage
                     }
                 }
             })
+        }
+        
+        if riderRequestActive == true{
+            let query = PFQuery(className: "riderRequest")
+            query.whereKey("username", equalTo: PFUser.current()?.username)
             
+            query.findObjectsInBackground(block: { (objects, error) in
+                if let riderRequests = objects {
+                    for i in riderRequests {
+                        if let driverUsername = i["driverResponsed"]{
+                            let query = PFQuery(className: "driverLocation")
+                            query.findObjectsInBackground(block: { (objects, error) in
+                                if let driverLocations = objects {
+                                    for j in driverLocations {
+                                        if let driverLocation = i["location"] as? PFGeoPoint {
+                                            
+                                            self.driverOnTheWay = true
+                                            
+                                            let driverCLLocation = CLLocation(latitude: driverLocation.latitude, longitude: driverLocation.longitude)
+                                            
+                                            let riderCLLocation = CLLocation(latitude: self.userLocation.latitude, longitude: self.userLocation.longitude)
+                                            
+                                            let distance = riderCLLocation.distance(from: driverCLLocation) / 1000
+                                            
+                                            let roundedDistance = round(distance*100)/100
+                                            
+                                            self.callAnUber.setTitle("Driver is \(roundedDistance)km away", for: [])
+                                            
+                                            let latDelta = abs(driverLocation.latitude - self.userLocation.latitude) * 2 + 0.005
+                                            let lonDelta = abs(driverLocation.longitude - self.userLocation.longitude) * 2 + 0.005
+                                            
+                                            let region = MKCoordinateRegion(center: self.userLocation, span: MKCoordinateSpan(latitudeDelta: latDelta, longitudeDelta: lonDelta))
+                                            
+                                            self.mapView.removeAnnotations(self.mapView.annotations)
+                                            
+                                            self.mapView.setRegion(region, animated: true)
+                                            
+                                            let userLocationAnnotation = MKPointAnnotation()
+                                            
+                                            userLocationAnnotation.coordinate = self.userLocation
+                                            
+                                            userLocationAnnotation.title = "Your location"
+                                            
+                                            self.mapView.addAnnotation(userLocationAnnotation)
+                                            
+                                            let driverLocationAnnotation = MKPointAnnotation()
+                                            
+                                            driverLocationAnnotation.coordinate = CLLocationCoordinate2D(latitude: driverLocation.latitude, longitude: driverLocation.longitude)
+                                            
+                                            driverLocationAnnotation.title = "Your driver"
+                                            
+                                            self.mapView.addAnnotation(driverLocationAnnotation)
+                                            
+                                        }
+                                    }
+                                }
+                            })
+                        }
+                    }
+                }
+            })
         }
     }
     
