@@ -20,6 +20,7 @@
 		274796621DE2AA130094F610 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 274796611DE2AA130094F610 /* AudioToolbox.framework */; };
 		274796641DE2AA230094F610 /* libstdc++.6.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 274796631DE2AA230094F610 /* libstdc++.6.tbd */; };
 		274796661DE2AA2E0094F610 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 274796651DE2AA2E0094F610 /* libsqlite3.tbd */; };
+		274796681DE2B9430094F610 /* RiderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274796671DE2B9430094F610 /* RiderViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,7 @@
 		274796611DE2AA130094F610 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		274796631DE2AA230094F610 /* libstdc++.6.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.tbd"; path = "usr/lib/libstdc++.6.tbd"; sourceTree = SDKROOT; };
 		274796651DE2AA2E0094F610 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		274796671DE2B9430094F610 /* RiderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RiderViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +121,7 @@
 				2747962C1DE2A7EF0094F610 /* AppDelegate.swift */,
 				2747962E1DE2A7EF0094F610 /* ViewController.swift */,
 				274796301DE2A7EF0094F610 /* Main.storyboard */,
+				274796671DE2B9430094F610 /* RiderViewController.swift */,
 				274796331DE2A7EF0094F610 /* Assets.xcassets */,
 				274796351DE2A7EF0094F610 /* LaunchScreen.storyboard */,
 				274796381DE2A7EF0094F610 /* Info.plist */,
@@ -292,6 +295,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2747962F1DE2A7EF0094F610 /* ViewController.swift in Sources */,
+				274796681DE2B9430094F610 /* RiderViewController.swift in Sources */,
 				2747962D1DE2A7EF0094F610 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

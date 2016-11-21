@@ -16,9 +16,6 @@ class ViewController: UIViewController {
         alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         
         self.present(alertController, animated: true, completion: nil)
-        
-        
-        
     }
     
     var signUpMode = true
@@ -32,6 +29,12 @@ class ViewController: UIViewController {
     @IBOutlet weak var signUpOrLogIn: UIButton!
     
     @IBOutlet weak var switchButton: UIButton!
+    
+    @IBOutlet weak var riderLabel: UILabel!
+    
+    @IBOutlet weak var driverLabel: UILabel!
+    
+    
     
     @IBAction func signUpOrLogIn(_ sender: Any) {
         if usernameTextField.text == "" || passwordTextField.text == ""{
@@ -51,6 +54,13 @@ class ViewController: UIViewController {
                         
                     } else {
                         print("Sign Up Successfull")
+                        if let isDriver = user["isDriver"] as? Bool{
+                            if isDriver {
+                                
+                            } else {
+                                self.performSegue(withIdentifier: "showRiderViewController", sender: self)
+                            }
+                        }
                     }
                 })
             } else {
@@ -62,6 +72,14 @@ class ViewController: UIViewController {
                         
                     } else {
                         print("Login Successfull")
+                        if let isDriver = PFUser.current()?["isDriver"] as? Bool{
+                            if isDriver {
+                                
+                            } else {
+                                self.performSegue(withIdentifier: "showRiderViewController", sender: self)
+                            }
+                        }
+
                     }
 
                 })
@@ -77,17 +95,37 @@ class ViewController: UIViewController {
             switchButton.setTitle("Switch To Sign Up", for: [])
             
             signUpMode = false
+            
+            isDriverSwitch.isHidden = true
+            
+            riderLabel.isHidden = true
+            
+            driverLabel.isHidden = true
+            
         } else {
             signUpOrLogIn.setTitle("Sign Up", for: [])
             
             switchButton.setTitle("Switch To Log In", for: [])
             
             signUpMode = true
+            
+            isDriverSwitch.isHidden = false
+            
+            riderLabel.isHidden = false
+            
+            driverLabel.isHidden = false
         }
 
     }
     
-    
+    override func viewDidAppear(_ animated: Bool) {
+        if let isDriver = PFUser.current()?["isDriver"] as? Bool{
+            if isDriver {
+                
+            } else {
+                self.performSegue(withIdentifier: "showRiderViewController", sender: self)
+            }
+        }    }
     
     
     override func viewDidLoad() {
